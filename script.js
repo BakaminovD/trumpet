@@ -2,12 +2,20 @@ let note
 let keys = document.querySelectorAll('.not');
 
 keys.forEach(key => {
- key.addEventListener('mousedown', playNote);
+ key.addEventListener('touchstart', playNote);
 });
 
 keys.forEach(key => {
-    key.addEventListener('mouseup', stopNote);
+  key.addEventListener('mousedown', playNote);
+ });
+
+keys.forEach(key => {
+    key.addEventListener('touchend', stopNote);
    });
+
+keys.forEach(key => {
+key.addEventListener('mouseup', stopNote);
+});
 
 function playNote(e) {
  let key = e.target;
@@ -15,7 +23,7 @@ function playNote(e) {
  key.classList.add('active');
  note.currentTime = 0;
  note.play();
- note.addEventListener('mouseup',() => {
+ note.addEventListener('touchend',() => {
   key.classList.remove('active');
   note.pause();
  });
